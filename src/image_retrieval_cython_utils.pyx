@@ -14,7 +14,7 @@ cpdef str _test_hello(str name):
 #@cython.wraparound(False)
 cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.double_t] errors,
-    np.ndarray[np.int_t, ndim=2] corresp,
+    np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
     int num_words,
 ):
@@ -121,21 +121,21 @@ cpdef np.ndarray[np.double_t, ndim=2] affine_local_optimization(
 #@cython.wraparound(False)
 #@cython.boundscheck(False)
 cpdef np.ndarray[np.int_t, ndim=2] get_tentative_correspondencies_cy(
-    np.ndarray[np.uint16_t] q_original,
-    np.ndarray[np.uint16_t] q_unique,
+    np.ndarray[np.uint32_t] q_original,
+    np.ndarray[np.uint32_t] q_unique,
     np.ndarray[np.int64_t] q_counts,
-    np.ndarray[np.int_t] q_sorted,
-    np.ndarray[np.uint16_t] db_original,
+    np.ndarray[np.int64_t] q_sorted,
+    np.ndarray[np.uint32_t] db_original,
     int max_tc,
     int max_MxN,
 ):
     # Count all the visual words
-    cdef np.ndarray[np.uint16_t] db_unique
+    cdef np.ndarray[np.uint32_t] db_unique
     cdef np.ndarray[np.int64_t] db_counts
     db_unique, db_counts = np.unique(db_original, return_counts=True)
     
     # Argsort visual words so we can quickly get indices for final output
-    cdef np.ndarray[np.int_t] db_sorted
+    cdef np.ndarray[np.int64_t] db_sorted
     db_sorted = np.argsort(db_original)
     
     # Variables for final output
@@ -180,10 +180,10 @@ cpdef np.ndarray[np.int_t, ndim=2] get_tentative_correspondencies_cy(
         else:
             db_i += 1
     
-    cdef np.ndarray[np.int_t, ndim=2] ret_np = np.array(ret, dtype=int, ndmin=2)
+    cdef np.ndarray[np.int64_t, ndim=2] ret_np = np.array(ret, dtype=int, ndmin=2)
     
     # If there are way too many correspondences, crop the result
-    cdef np.ndarray[np.int_t] counts_np, keys
+    cdef np.ndarray[np.int64_t] counts_np, keys
     if ret_np.shape[0] > max_tc:
         counts_np = np.array(counts)
         keys = np.argsort(counts, kind='stable')[:max_tc]
