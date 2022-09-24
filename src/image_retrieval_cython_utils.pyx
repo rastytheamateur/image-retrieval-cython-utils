@@ -16,10 +16,11 @@ cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.double_t] errors,
     np.ndarray[np.int_t, ndim=2] corresp,
     int inlier_threshold,
+    int num_words,
 ):
     cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
 
-    # cdef set taken = set()
+    cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
     cdef int i = 0
     cdef int i_max = errors.shape[0]
     cdef int actual_y, best_index
@@ -30,14 +31,14 @@ cpdef np.ndarray[np.npy_bool] verify_model(
         best_error = np.inf
         best_index = -1
         while i < i_max and actual_y == corresp[i, 1]:
-            if errors[i] < best_error:# and corresp[i, 0] not in taken:
+            if errors[i] < best_error and taken[corresp[i, 0]] is False:
                 best_error = errors[i]
                 best_index = i
             i += 1
         
         if best_error < inlier_threshold:
             mask[best_index] = True
-            #taken.add(corresp[best_index, 0])
+            taken[corresp[best_index, 0]] = True
     
     return mask
 
