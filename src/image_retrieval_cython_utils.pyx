@@ -14,8 +14,11 @@ cpdef str _test_hello(str name):
     return f'Hello {name}'
 
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
+# TODO: Remove num_words argument since it is not used anymore
+
+
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 cpdef void verify_model_inplace(
     double [::1] errors,
     long [:, ::1] corresp,
@@ -51,8 +54,8 @@ cpdef void verify_model_inplace(
     # return mask
 
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 cpdef np.ndarray[np.npy_bool] verify_model(
     double [::1] errors,
     long [:, ::1] corresp,
