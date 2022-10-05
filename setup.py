@@ -9,7 +9,7 @@ ext_modules=[
 
 setup(
     name='image-retrieval-cython-utils',
-    version='0.0.7',
+    version='0.0.8',
     ext_modules=ext_modules,
     install_requires=[
         "numpy",

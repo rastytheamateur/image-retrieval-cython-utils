@@ -12,17 +12,20 @@ cpdef str _test_hello(str name):
     return f'Hello {name}'
 
 
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
+@cython.boundscheck(False)
+@cython.wraparound(False)
 cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.double_t] errors,
     np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
     int num_words,
+    unsigned char [::1] taken,
 ):
     cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
 
-    cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
+    # cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
+    taken[:] = 0
+
     cdef int i = 0
     cdef int i_max = errors.shape[0]
     cdef int actual_y, best_index
