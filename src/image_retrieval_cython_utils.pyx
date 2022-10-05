@@ -12,8 +12,8 @@ cpdef str _test_hello(str name):
     return f'Hello {name}'
 
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.double_t] errors,
     np.ndarray[np.int64_t, ndim=2] corresp,
@@ -33,7 +33,7 @@ cpdef np.ndarray[np.npy_bool] verify_model(
     while i < i_max:
         actual_y = corresp[i, 1]
         
-        best_error = INFINITY
+        best_error = np.inf
         best_index = -1
         while i < i_max and actual_y == corresp[i, 1]:
             if errors[i] < best_error and taken[corresp[i, 0]] is False:
