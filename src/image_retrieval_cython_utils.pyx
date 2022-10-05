@@ -19,7 +19,7 @@ cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
     int num_words,
-    unsigned char [::1] taken,
+    np.ndarray[np.uint8_t] taken,
 ):
     cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
 
