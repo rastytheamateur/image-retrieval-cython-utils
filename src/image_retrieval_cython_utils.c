@@ -1449,9 +1449,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* BufferIndexError.proto */
-static void __Pyx_RaiseBufferIndexError(int axis);
-
 #define __Pyx_BufPtrStrided2d(type, buf, i0, s0, i1, s1) (type)((char*)buf + i0 * s0 + i1 * s1)
 #define __Pyx_BufPtrStrided1d(type, buf, i0, s0) (type)((char*)buf + i0 * s0)
 /* PyThreadStateGet.proto */
@@ -1501,6 +1498,9 @@ static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_n
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
+
+/* BufferIndexError.proto */
+static void __Pyx_RaiseBufferIndexError(int axis);
 
 /* IncludeStringH.proto */
 #include <string.h>
@@ -1924,7 +1924,6 @@ static PyObject *__pyx_builtin_ImportError;
 static const char __pyx_k_A[] = "A";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_pi[] = "pi";
-static const char __pyx_k_inf[] = "inf";
 static const char __pyx_k_None[] = "None";
 static const char __pyx_k_kind[] = "kind";
 static const char __pyx_k_main[] = "__main__";
@@ -1976,7 +1975,6 @@ static PyObject *__pyx_kp_u_det_AtA_0;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_errors;
 static PyObject *__pyx_n_s_import;
-static PyObject *__pyx_n_s_inf;
 static PyObject *__pyx_n_s_inlier_threshold;
 static PyObject *__pyx_n_s_kind;
 static PyObject *__pyx_n_s_main;
@@ -2120,8 +2118,8 @@ static PyObject *__pyx_pf_28image_retrieval_cython_utils__test_hello(CYTHON_UNUS
 }
 
 /* "image_retrieval_cython_utils.pyx":17
- * #@cython.boundscheck(False)
- * #@cython.wraparound(False)
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
  * cpdef np.ndarray[np.npy_bool] verify_model(             # <<<<<<<<<<<<<<
  *     np.ndarray[np.double_t] errors,
  *     np.ndarray[np.int64_t, ndim=2] corresp,
@@ -2154,9 +2152,7 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
   Py_ssize_t __pyx_t_7;
   Py_ssize_t __pyx_t_8;
   int __pyx_t_9;
-  double __pyx_t_10;
-  int __pyx_t_11;
-  __pyx_t_5numpy_int64_t __pyx_t_12;
+  __pyx_t_5numpy_int64_t __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2282,44 +2278,24 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
  *     while i < i_max:
  *         actual_y = corresp[i, 1]             # <<<<<<<<<<<<<<
  * 
- *         best_error = np.inf
+ *         best_error = INFINITY
  */
     __pyx_t_7 = __pyx_v_i;
     __pyx_t_8 = 1;
-    __pyx_t_9 = -1;
-    if (__pyx_t_7 < 0) {
-      __pyx_t_7 += __pyx_pybuffernd_corresp.diminfo[0].shape;
-      if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 0;
-    } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_corresp.diminfo[0].shape)) __pyx_t_9 = 0;
-    if (__pyx_t_8 < 0) {
-      __pyx_t_8 += __pyx_pybuffernd_corresp.diminfo[1].shape;
-      if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 1;
-    } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_corresp.diminfo[1].shape)) __pyx_t_9 = 1;
-    if (unlikely(__pyx_t_9 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_9);
-      __PYX_ERR(0, 34, __pyx_L1_error)
-    }
     __pyx_v_actual_y = (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[1].strides));
 
     /* "image_retrieval_cython_utils.pyx":36
  *         actual_y = corresp[i, 1]
  * 
- *         best_error = np.inf             # <<<<<<<<<<<<<<
+ *         best_error = INFINITY             # <<<<<<<<<<<<<<
  *         best_index = -1
  *         while i < i_max and actual_y == corresp[i, 1]:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_inf); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 36, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_best_error = __pyx_t_10;
+    __pyx_v_best_error = NPY_INFINITY;
 
     /* "image_retrieval_cython_utils.pyx":37
  * 
- *         best_error = np.inf
+ *         best_error = INFINITY
  *         best_index = -1             # <<<<<<<<<<<<<<
  *         while i < i_max and actual_y == corresp[i, 1]:
  *             if errors[i] < best_error and taken[corresp[i, 0]] is False:
@@ -2327,36 +2303,23 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
     __pyx_v_best_index = -1;
 
     /* "image_retrieval_cython_utils.pyx":38
- *         best_error = np.inf
+ *         best_error = INFINITY
  *         best_index = -1
  *         while i < i_max and actual_y == corresp[i, 1]:             # <<<<<<<<<<<<<<
  *             if errors[i] < best_error and taken[corresp[i, 0]] is False:
  *                 best_error = errors[i]
  */
     while (1) {
-      __pyx_t_11 = ((__pyx_v_i < __pyx_v_i_max) != 0);
-      if (__pyx_t_11) {
+      __pyx_t_9 = ((__pyx_v_i < __pyx_v_i_max) != 0);
+      if (__pyx_t_9) {
       } else {
-        __pyx_t_6 = __pyx_t_11;
+        __pyx_t_6 = __pyx_t_9;
         goto __pyx_L7_bool_binop_done;
       }
       __pyx_t_8 = __pyx_v_i;
       __pyx_t_7 = 1;
-      __pyx_t_9 = -1;
-      if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_corresp.diminfo[0].shape;
-        if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_corresp.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_corresp.diminfo[1].shape;
-        if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_corresp.diminfo[1].shape)) __pyx_t_9 = 1;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 38, __pyx_L1_error)
-      }
-      __pyx_t_11 = ((__pyx_v_actual_y == (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[1].strides))) != 0);
-      __pyx_t_6 = __pyx_t_11;
+      __pyx_t_9 = ((__pyx_v_actual_y == (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[1].strides))) != 0);
+      __pyx_t_6 = __pyx_t_9;
       __pyx_L7_bool_binop_done:;
       if (!__pyx_t_6) break;
 
@@ -2368,48 +2331,17 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
  *                 best_index = i
  */
       __pyx_t_7 = __pyx_v_i;
-      __pyx_t_9 = -1;
-      if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_errors.diminfo[0].shape;
-        if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_errors.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 39, __pyx_L1_error)
-      }
-      __pyx_t_11 = (((*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_double_t *, __pyx_pybuffernd_errors.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_errors.diminfo[0].strides)) < __pyx_v_best_error) != 0);
-      if (__pyx_t_11) {
+      __pyx_t_9 = (((*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_double_t *, __pyx_pybuffernd_errors.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_errors.diminfo[0].strides)) < __pyx_v_best_error) != 0);
+      if (__pyx_t_9) {
       } else {
-        __pyx_t_6 = __pyx_t_11;
+        __pyx_t_6 = __pyx_t_9;
         goto __pyx_L10_bool_binop_done;
       }
       __pyx_t_7 = __pyx_v_i;
       __pyx_t_8 = 0;
-      __pyx_t_9 = -1;
-      if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_corresp.diminfo[0].shape;
-        if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_corresp.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_corresp.diminfo[1].shape;
-        if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_corresp.diminfo[1].shape)) __pyx_t_9 = 1;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 39, __pyx_L1_error)
-      }
-      __pyx_t_12 = (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[1].strides));
-      __pyx_t_9 = -1;
-      if (__pyx_t_12 < 0) {
-        __pyx_t_12 += __pyx_pybuffernd_taken.diminfo[0].shape;
-        if (unlikely(__pyx_t_12 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_12 >= __pyx_pybuffernd_taken.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 39, __pyx_L1_error)
-      }
-      __pyx_t_11 = (((*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_uint8_t *, __pyx_pybuffernd_taken.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_taken.diminfo[0].strides)) == 0) != 0);
-      __pyx_t_6 = __pyx_t_11;
+      __pyx_t_10 = (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[1].strides));
+      __pyx_t_9 = (((*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_uint8_t *, __pyx_pybuffernd_taken.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_taken.diminfo[0].strides)) == 0) != 0);
+      __pyx_t_6 = __pyx_t_9;
       __pyx_L10_bool_binop_done:;
       if (__pyx_t_6) {
 
@@ -2421,15 +2353,6 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
  *             i += 1
  */
         __pyx_t_8 = __pyx_v_i;
-        __pyx_t_9 = -1;
-        if (__pyx_t_8 < 0) {
-          __pyx_t_8 += __pyx_pybuffernd_errors.diminfo[0].shape;
-          if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 0;
-        } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_errors.diminfo[0].shape)) __pyx_t_9 = 0;
-        if (unlikely(__pyx_t_9 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_9);
-          __PYX_ERR(0, 40, __pyx_L1_error)
-        }
         __pyx_v_best_error = (*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_double_t *, __pyx_pybuffernd_errors.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_errors.diminfo[0].strides));
 
         /* "image_retrieval_cython_utils.pyx":41
@@ -2478,15 +2401,6 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
  * 
  */
       __pyx_t_8 = __pyx_v_best_index;
-      __pyx_t_9 = -1;
-      if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_mask.diminfo[0].shape;
-        if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_mask.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 45, __pyx_L1_error)
-      }
       *__Pyx_BufPtrStrided1d(npy_bool *, __pyx_pybuffernd_mask.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_mask.diminfo[0].strides) = 1;
 
       /* "image_retrieval_cython_utils.pyx":46
@@ -2498,30 +2412,8 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
  */
       __pyx_t_8 = __pyx_v_best_index;
       __pyx_t_7 = 0;
-      __pyx_t_9 = -1;
-      if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_corresp.diminfo[0].shape;
-        if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_corresp.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_corresp.diminfo[1].shape;
-        if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_corresp.diminfo[1].shape)) __pyx_t_9 = 1;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 46, __pyx_L1_error)
-      }
-      __pyx_t_12 = (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[1].strides));
-      __pyx_t_9 = -1;
-      if (__pyx_t_12 < 0) {
-        __pyx_t_12 += __pyx_pybuffernd_taken.diminfo[0].shape;
-        if (unlikely(__pyx_t_12 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_12 >= __pyx_pybuffernd_taken.diminfo[0].shape)) __pyx_t_9 = 0;
-      if (unlikely(__pyx_t_9 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 46, __pyx_L1_error)
-      }
-      *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_uint8_t *, __pyx_pybuffernd_taken.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_taken.diminfo[0].strides) = 1;
+      __pyx_t_10 = (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_int64_t *, __pyx_pybuffernd_corresp.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_corresp.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_corresp.diminfo[1].strides));
+      *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_uint8_t *, __pyx_pybuffernd_taken.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_taken.diminfo[0].strides) = 1;
 
       /* "image_retrieval_cython_utils.pyx":44
  *             i += 1
@@ -2546,8 +2438,8 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArra
   goto __pyx_L0;
 
   /* "image_retrieval_cython_utils.pyx":17
- * #@cython.boundscheck(False)
- * #@cython.wraparound(False)
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
  * cpdef np.ndarray[np.npy_bool] verify_model(             # <<<<<<<<<<<<<<
  *     np.ndarray[np.double_t] errors,
  *     np.ndarray[np.int64_t, ndim=2] corresp,
@@ -6304,7 +6196,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_errors, __pyx_k_errors, sizeof(__pyx_k_errors), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
-  {&__pyx_n_s_inf, __pyx_k_inf, sizeof(__pyx_k_inf), 0, 0, 1, 1},
   {&__pyx_n_s_inlier_threshold, __pyx_k_inlier_threshold, sizeof(__pyx_k_inlier_threshold), 0, 0, 1, 1},
   {&__pyx_n_s_kind, __pyx_k_kind, sizeof(__pyx_k_kind), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -7512,12 +7403,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
     return 0;
 }
 
-/* BufferIndexError */
-  static void __Pyx_RaiseBufferIndexError(int axis) {
-  PyErr_Format(PyExc_IndexError,
-     "Out of bounds on buffer access (axis %d)", axis);
-}
-
 /* PyErrFetchRestore */
   #if CYTHON_FAST_THREAD_STATE
 static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
@@ -7682,6 +7567,12 @@ invalid_keyword:
     #endif
 bad:
     return -1;
+}
+
+/* BufferIndexError */
+  static void __Pyx_RaiseBufferIndexError(int axis) {
+  PyErr_Format(PyExc_IndexError,
+     "Out of bounds on buffer access (axis %d)", axis);
 }
 
 /* PyCFunctionFastCall */
