@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import numpy as np
 cimport numpy as np
 np.import_array()
@@ -14,61 +12,17 @@ cpdef str _test_hello(str name):
     return f'Hello {name}'
 
 
-# TODO: Remove num_words argument since it is not used anymore
-
-
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-cpdef void verify_model_inplace(
-    double [::1] errors,
-    long [:, ::1] corresp,
-    int inlier_threshold,
-    int num_words,
-    unsigned char [::1] taken,
-    unsigned char [::1] mask,
-):
-    # Move those to arguments for performance reasons
-    # cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
-    # cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
-    taken[:] = False
-    
-    cdef int i = 0
-    cdef int i_max = errors.shape[0]
-    cdef int actual_y, best_index
-    cdef double best_error
-    while i < i_max:
-        actual_y = corresp[i, 1]
-        
-        best_error = INFINITY
-        best_index = -1
-        while i < i_max and actual_y == corresp[i, 1]:
-            if errors[i] < best_error and taken[corresp[i, 0]] is False:
-                best_error = errors[i]
-                best_index = i
-            i += 1
-        
-        if best_error < inlier_threshold:
-            mask[best_index] = True
-            taken[corresp[best_index, 0]] = True
-    
-    # return mask
-
-
 #@cython.boundscheck(False)
 #@cython.wraparound(False)
 cpdef np.ndarray[np.npy_bool] verify_model(
-    double [::1] errors,
-    long [:, ::1] corresp,
+    np.ndarray[np.double_t] errors,
+    np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
     int num_words,
-    unsigned char [::1] taken,
 ):
-    # Move those to arguments for performance reasons
-    # cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
-    taken[:] = False
-    
     cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
-    
+
+    cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
     cdef int i = 0
     cdef int i_max = errors.shape[0]
     cdef int actual_y, best_index
@@ -92,8 +46,8 @@ cpdef np.ndarray[np.npy_bool] verify_model(
 
 
 @cython.cdivision(True)
-@cython.wraparound(False)
-@cython.boundscheck(False)
+#@cython.wraparound(False)
+#@cython.boundscheck(False)
 cpdef np.ndarray[np.double_t, ndim=2] affine_local_optimization(
     np.ndarray[np.double_t, ndim=2] A,
     np.ndarray[np.double_t, ndim=2] q_geom,
@@ -166,8 +120,8 @@ cpdef np.ndarray[np.double_t, ndim=2] affine_local_optimization(
     return H
 
 
-@cython.wraparound(False)
-@cython.boundscheck(False)
+#@cython.wraparound(False)
+#@cython.boundscheck(False)
 cpdef np.ndarray[np.int_t, ndim=2] get_tentative_correspondencies_cy(
     np.ndarray[np.uint32_t] q_original,
     np.ndarray[np.uint32_t] q_unique,
