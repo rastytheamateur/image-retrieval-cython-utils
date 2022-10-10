@@ -1911,7 +1911,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void); /*proto*/
 
 /* Module declarations from 'image_retrieval_cython_utils' */
 static PyObject *__pyx_f_28image_retrieval_cython_utils__test_hello(PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(PyArrayObject *, PyArrayObject *, int, int __pyx_skip_dispatch); /*proto*/
+static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArrayObject *, PyArrayObject *, int, int __pyx_skip_dispatch); /*proto*/
 static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_affine_local_optimization(PyArrayObject *, PyArrayObject *, PyArrayObject *, int __pyx_skip_dispatch); /*proto*/
 static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_get_tentative_correspondencies_cy(PyArrayObject *, PyArrayObject *, PyArrayObject *, PyArrayObject *, PyArrayObject *, int, int, int __pyx_skip_dispatch); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5numpy_double_t = { "double_t", NULL, sizeof(__pyx_t_5numpy_double_t), { 0 }, 0, 'R', 0, 0 };
@@ -2003,7 +2003,7 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_unique;
 static PyObject *__pyx_n_s_zeros;
 static PyObject *__pyx_pf_28image_retrieval_cython_utils__test_hello(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model_set(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold); /* proto */
+static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold); /* proto */
 static PyObject *__pyx_pf_28image_retrieval_cython_utils_4affine_local_optimization(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_q_geom, PyArrayObject *__pyx_v_db_geom); /* proto */
 static PyObject *__pyx_pf_28image_retrieval_cython_utils_6get_tentative_correspondencies_cy(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_q_original, PyArrayObject *__pyx_v_q_unique, PyArrayObject *__pyx_v_q_counts, PyArrayObject *__pyx_v_q_sorted, PyArrayObject *__pyx_v_db_original, int __pyx_v_max_tc, int __pyx_v_max_MxN); /* proto */
 static PyObject *__pyx_int_0;
@@ -2120,13 +2120,13 @@ static PyObject *__pyx_pf_28image_retrieval_cython_utils__test_hello(CYTHON_UNUS
 /* "image_retrieval_cython_utils.pyx":17
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef np.ndarray[np.npy_bool] verify_model_set(             # <<<<<<<<<<<<<<
+ * cpdef np.ndarray[np.npy_bool] verify_model(             # <<<<<<<<<<<<<<
  *     np.ndarray[np.double_t] errors,
  *     np.ndarray[np.int64_t, ndim=2] corresp,
  */
 
-static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model(PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyArrayObject *__pyx_v_mask = 0;
   PyObject *__pyx_v_taken = 0;
   int __pyx_v_i;
@@ -2156,7 +2156,7 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(Py
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("verify_model_set", 0);
+  __Pyx_RefNannySetupContext("verify_model", 0);
   __pyx_pybuffer_mask.pybuffer.buf = NULL;
   __pyx_pybuffer_mask.refcount = 0;
   __pyx_pybuffernd_mask.data = NULL;
@@ -2439,7 +2439,7 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(Py
   /* "image_retrieval_cython_utils.pyx":17
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef np.ndarray[np.npy_bool] verify_model_set(             # <<<<<<<<<<<<<<
+ * cpdef np.ndarray[np.npy_bool] verify_model(             # <<<<<<<<<<<<<<
  *     np.ndarray[np.double_t] errors,
  *     np.ndarray[np.int64_t, ndim=2] corresp,
  */
@@ -2458,7 +2458,7 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(Py
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_errors.rcbuffer->pybuffer);
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_mask.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model_set", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   goto __pyx_L2;
   __pyx_L0:;
@@ -2474,8 +2474,8 @@ static PyArrayObject *__pyx_f_28image_retrieval_cython_utils_verify_model_set(Py
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyArrayObject *__pyx_v_errors = 0;
   PyArrayObject *__pyx_v_corresp = 0;
   int __pyx_v_inlier_threshold;
@@ -2484,7 +2484,7 @@ static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObj
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("verify_model_set (wrapper)", 0);
+  __Pyx_RefNannySetupContext("verify_model (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_errors,&__pyx_n_s_corresp,&__pyx_n_s_inlier_threshold,0};
     PyObject* values[3] = {0,0,0};
@@ -2510,17 +2510,17 @@ static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_corresp)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("verify_model_set", 1, 3, 3, 1); __PYX_ERR(0, 17, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("verify_model", 1, 3, 3, 1); __PYX_ERR(0, 17, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_inlier_threshold)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("verify_model_set", 1, 3, 3, 2); __PYX_ERR(0, 17, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("verify_model", 1, 3, 3, 2); __PYX_ERR(0, 17, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "verify_model_set") < 0)) __PYX_ERR(0, 17, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "verify_model") < 0)) __PYX_ERR(0, 17, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2535,15 +2535,15 @@ static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("verify_model_set", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 17, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("verify_model", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 17, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model_set", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_errors), __pyx_ptype_5numpy_ndarray, 1, "errors", 0))) __PYX_ERR(0, 18, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_corresp), __pyx_ptype_5numpy_ndarray, 1, "corresp", 0))) __PYX_ERR(0, 19, __pyx_L1_error)
-  __pyx_r = __pyx_pf_28image_retrieval_cython_utils_2verify_model_set(__pyx_self, __pyx_v_errors, __pyx_v_corresp, __pyx_v_inlier_threshold);
+  __pyx_r = __pyx_pf_28image_retrieval_cython_utils_2verify_model(__pyx_self, __pyx_v_errors, __pyx_v_corresp, __pyx_v_inlier_threshold);
 
   /* function exit code */
   goto __pyx_L0;
@@ -2554,7 +2554,7 @@ static PyObject *__pyx_pw_28image_retrieval_cython_utils_3verify_model_set(PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model_set(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold) {
+static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_errors, PyArrayObject *__pyx_v_corresp, int __pyx_v_inlier_threshold) {
   __Pyx_LocalBuf_ND __pyx_pybuffernd_corresp;
   __Pyx_Buffer __pyx_pybuffer_corresp;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_errors;
@@ -2565,7 +2565,7 @@ static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model_set(CYTHO
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("verify_model_set", 0);
+  __Pyx_RefNannySetupContext("verify_model", 0);
   __pyx_pybuffer_errors.pybuffer.buf = NULL;
   __pyx_pybuffer_errors.refcount = 0;
   __pyx_pybuffernd_errors.data = NULL;
@@ -2585,7 +2585,7 @@ static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model_set(CYTHO
   }
   __pyx_pybuffernd_corresp.diminfo[0].strides = __pyx_pybuffernd_corresp.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_corresp.diminfo[0].shape = __pyx_pybuffernd_corresp.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_corresp.diminfo[1].strides = __pyx_pybuffernd_corresp.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_corresp.diminfo[1].shape = __pyx_pybuffernd_corresp.rcbuffer->pybuffer.shape[1];
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_28image_retrieval_cython_utils_verify_model_set(__pyx_v_errors, __pyx_v_corresp, __pyx_v_inlier_threshold, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_28image_retrieval_cython_utils_verify_model(__pyx_v_errors, __pyx_v_corresp, __pyx_v_inlier_threshold, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2601,7 +2601,7 @@ static PyObject *__pyx_pf_28image_retrieval_cython_utils_2verify_model_set(CYTHO
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_corresp.rcbuffer->pybuffer);
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_errors.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model_set", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("image_retrieval_cython_utils.verify_model", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
@@ -6096,7 +6096,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
 
 static PyMethodDef __pyx_methods[] = {
   {"_test_hello", (PyCFunction)__pyx_pw_28image_retrieval_cython_utils_1_test_hello, METH_O, 0},
-  {"verify_model_set", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_28image_retrieval_cython_utils_3verify_model_set, METH_VARARGS|METH_KEYWORDS, 0},
+  {"verify_model", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_28image_retrieval_cython_utils_3verify_model, METH_VARARGS|METH_KEYWORDS, 0},
   {"affine_local_optimization", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_28image_retrieval_cython_utils_5affine_local_optimization, METH_VARARGS|METH_KEYWORDS, 0},
   {"get_tentative_correspondencies_cy", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_28image_retrieval_cython_utils_7get_tentative_correspondencies_cy, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}

@@ -14,7 +14,7 @@ cpdef str _test_hello(str name):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef np.ndarray[np.npy_bool] verify_model_set(
+cpdef np.ndarray[np.npy_bool] verify_model(
     np.ndarray[np.double_t] errors,
     np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
