@@ -14,17 +14,13 @@ cpdef str _test_hello(str name):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef np.ndarray[np.npy_bool] verify_model(
+cpdef np.ndarray[np.npy_bool] verify_model_set(
     np.ndarray[np.double_t] errors,
     np.ndarray[np.int64_t, ndim=2] corresp,
     int inlier_threshold,
-    int num_words,
-    np.ndarray[np.uint8_t] taken,
 ):
     cdef np.ndarray[np.npy_bool] mask = np.zeros([corresp.shape[0]], dtype=bool)
-
-    # cdef np.ndarray[np.npy_bool] taken = np.zeros([num_words], dtype=bool)
-    taken[:] = 0
+    cdef set taken = set()
 
     cdef int i = 0
     cdef int i_max = errors.shape[0]
@@ -36,14 +32,14 @@ cpdef np.ndarray[np.npy_bool] verify_model(
         best_error = INFINITY
         best_index = -1
         while i < i_max and actual_y == corresp[i, 1]:
-            if errors[i] < best_error and taken[corresp[i, 0]] is False:
+            if errors[i] < best_error and corresp[i, 0] not in taken:
                 best_error = errors[i]
                 best_index = i
             i += 1
         
         if best_error < inlier_threshold:
             mask[best_index] = True
-            taken[corresp[best_index, 0]] = True
+            taken.add(corresp[best_index, 0])
     
     return mask
 
